@@ -1,5 +1,6 @@
 from item import Item
 from cart import ShoppingCart
+import time
 
 cart = ShoppingCart()
 
@@ -25,9 +26,11 @@ order_options = [
 
 def user_interface():
     print('Welcome To Example Mart!')
+    time.sleep(.300)
     print('In Stock Today: ')
     for item in items:
         print(str(item))
+    time.sleep(.300)
     while True:
         print('What would you like to do?')
         for option in options:
@@ -43,6 +46,7 @@ def user_interface():
                     break
                 except:
                     print('That\'s not an item we sell.')
+                    time.sleep(.300)
                     continue
             while True:
                 try:
@@ -52,6 +56,7 @@ def user_interface():
                     print('Please enter a number.')
                     continue
             cart.add_item(choice, quantity)
+            time.sleep(.700)
             continue
 
         elif choice == 'b':
@@ -61,24 +66,32 @@ def user_interface():
                 try:
                     choice = int(input('How would you like to order the cart contents? Enter the corresponding number: '))
                     if choice > 0 and choice < 5:
+                        time.sleep(.300)
                         break
                     else:
                         print('Please enter the number corresponding to your choice. ')
+                        time.sleep(.300)
                         continue
                 except ValueError:
                     print('Please enter the number corresponding to your choice. ')
+                    time.sleep(.300)
                     continue
             if choice == 1:
                 cart.contents_by_order_added()
+                time.sleep(.700)
             elif choice == 2:
                 cart.contents_by_price('ascending')
+                time.sleep(.700)
             elif choice == 3:
                 cart.contents_by_price('descending')
+                time.sleep(.700)
             elif choice == 4:
                 cart.contents_alphabetically()
+                time.sleep(.700)
 
         elif choice == 'c':
             print('Your total bill comes to: ${:,.2f}'.format(cart.get_total()))
+            time.sleep(.700)
 
         elif choice == 'd':
             for item in cart.items:
@@ -90,30 +103,40 @@ def user_interface():
                     break
                 except:
                     print('Please enter a valid selection.')
+                    time.sleep(.300)
                     continue
 
         elif choice == 'e':
             while True:
                 print('I understand that it\'s a bad idea to put a real credit card number into an example app like this. Here\'s an example number that will pass the psuedo credit card validator I wrote: ' )
+                time.sleep(.300)
                 print('4556 7375 8689 9855')
+                time.sleep(.300)
                 print('That should work.')
+                time.sleep(.300)
                 checkout_success = cart.checkout(input('Credit Card Number: '), input('Name on card: ', ), input('Address: '))
                 if checkout_success:
                     break
+                    time.sleep(.700)
                 else:
                     print('Please enter a valid card number. Try our example card number, 4556 7375 8689 9855')
+                    time.sleep(.300)
                     continue
 
         elif choice == 'f':
             cart.empty()
+            time.sleep(.300)
             print('Cart has been emptied.')
-            continue
+            time.sleep(.700)
+
 
         elif choice == 'q':
             print('Thank you for shopping at Example Mart! Have a nice day!')
+            time.sleep(1)
             exit()
         else:
             print('That wasn\'t one of the available options.')
+            time.sleep(.700)
             continue
 
 
